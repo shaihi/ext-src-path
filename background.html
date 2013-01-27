@@ -1,0 +1,50 @@
+<script>
+
+/*
+chrome.tabs.getAllInWindow(null, function(tabs){
+  tabs.forEach(function(tab){
+  if((tab.url.indexOf("file://")!=-1)){
+chrome.tabs.insertCSS(null, {file:"styles.css"});
+	}
+  });
+});
+
+chrome.tabs.onUpdated.addListener(function(tabId, changeInfo, tab){
+  if(changeInfo.status == "loading"){
+if(tab.url.indexOf("file://")!=-1){
+chrome.tabs.insertCSS(null, {file:"styles.css"});
+	}
+		else{
+chrome.tabs.insertCSS(null, {file:""});
+
+	}
+	}
+	if(tab.url.indexOf("file://")!=-1){
+chrome.tabs.insertCSS(null, {file:"styles.css"});
+
+	}
+});
+chrome.tabs.onRemoved.addListener(function(tabId, changeInfo, tab){ 
+    chrome.tabs.sendRequest(tab.id,{req:"func"}, function(response){
+    });if(tab.url.indexOf("file://")!=-1){
+
+}
+
+});
+
+chrome.tabs.onActiveChanged.addListener(OnActiveChanged);  
+function OnActiveChanged( tabId, selectInfo )  
+{  
+	if(tab.url.indexOf("file://")!=-1){
+chrome.tabs.insertCSS(null, {file:"styles.css"});
+
+	
+		}
+        else{
+        chrome.tabs.insertCSS(null, {file:""});
+
+        }
+  }  
+  
+*/
+</script>
