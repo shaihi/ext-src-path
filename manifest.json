@@ -1,6 +1,6 @@
 {
    "chrome_url_overrides": {
-      "newtab": "popup.html"
+      "newtab": "tab.html"
    },
    "permissions": [ 
 					"management",
@@ -8,12 +8,7 @@
 					"clipboardWrite",
 					"file:///*/*", "file://*/*"
 				],
-   "icons": {
-      "128": "icon128.png",
-      "16": "icon.png",
-      "48": "icon16.png"
-   },
    "manifest_version": 2,
    "name": "Extension source code",
-   "version": "4.1"
+   "version": "0.1"
 }
