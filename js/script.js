@@ -1,6 +1,4 @@
-//The div to populate with all the information
-var $extTable = $('.chrome-ext-list');
-var username = "";
+
 //Used http://paul.kinlan.me/creating-a-new-new-tab-page-for-chrome/ as reference
 var getAllExtFunc = function (listOfExt) {
 	var len = listOfExt.length;
@@ -12,30 +10,81 @@ var getAllExtFunc = function (listOfExt) {
 			href="#";
 		else
 			href="file://C:/Users/" + username + "/AppData/Local/Google/Chrome/User Data/Default/Extensions/" + listOfExt[i].id + "/";
-		$(".chrome-ext-list").append('<a href="' + href + '">' + listOfExt[i].name + '</a><br/>');
+		var clipboard = '<button id="copyUrl" data-href="' + href +'">Copy</button>';
+		$(".chrome-ext-list").append('<a href="' + href + '">' + listOfExt[i].name + '</a>' + clipboard + '<br/>');
 	}
 };
 
-/* UI Elements */
+var Storage = {
+	storageOption: function(type) {
+		//For now only use Sync		
+		return localStorage;
+	},
+	save: function (type, key, data) {
+		Storage.storageOption(type).setItem(key,data);/*, function () {
+		console.log("saved data");
+		});*/
+	},
+	load: function (type, key) {
+		return Storage.storageOption(type).getItem(key);/*, function (object) {
+			console.log("read : " +object + object[key]);
+			return object[key];
+		})*/}
+};//End of Storage
+
+// Copy to clipboard helper function
+//http://www.pakzilla.com/2012/03/20/how-to-copy-to-clipboard-in-chrome-extension/
+function copyToClipboard( text ){
+	var copyDiv = document.createElement('div');
+	copyDiv.contentEditable = true;
+	document.body.appendChild(copyDiv);
+	copyDiv.innerHTML = text;
+	copyDiv.unselectable = "off";
+	copyDiv.focus();
+	document.execCommand('SelectAll');
+	document.execCommand("Copy", false, null);
+	document.body.removeChild(copyDiv);
+}
+
+/* UI Elements and General startup sequence*/
+//The div to populate with all the information
+var $extTable = $('.chrome-ext-list');
+var username = (typeof Storage.load(null,'path') != "undefined"?Storage.load(null,'path'):"");
+console.log(" username is " + username);
 //Attach the event listener for the click event after document loads
 $(document).ready( function() {
-/*on('.hrome-ext-list a', 'click', function() {
+/*on('.chrome-ext-list a', 'click', function() {
 	console.log("Fuck!");
 	chrome.tabs.create({'url': this.href}, function(tab) {
 		// Tab opened.
 	});
 });*/
+	//check if we have a username saved
+	var dbdata = Storage.load(null,"path");/*,function(object){
+		var i = 0;
+		dbdata = object['path'];
+	});*/
+	if (typeof dbdata != "undefined")
+	{
+		$(".windows").hide();
+		chrome.management.getAll(getAllExtFunc);
+	}
 	$('#regular-ext').click(function() {
 		console.log("clicked regualr view");
 		chrome.tabs.update({url:"chrome-internal://newtab/"});
 		return false;
 	});
-	$("#save").click(function(e) {
+	$("#save").click(function() {
 		username = $("input").val();
 		//Get the list of all chrome extensions with their information
 		chrome.management.getAll(getAllExtFunc);
-		e.preventDefault();
+		Storage.save(null,'path',username);
 	});
+});
+
+$("#copyUrl").live('click',function() {
+	console.log($(this), $(this).data("href"));
+	copyToClipboard($(this).data("href"));
 });
 
 

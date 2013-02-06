@@ -4,6 +4,8 @@
    },
    "permissions": [ 
 					"management",
+					"storage",
+					"clipboardWrite",
 					"file:///*/*", "file://*/*"
 				],
    "icons": {
