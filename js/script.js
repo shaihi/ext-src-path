@@ -53,18 +53,24 @@ var getAllExtFunc = function (listOfExt) {
 		console.log("processing " + i);
 		//console.log('<p>' + listOfExt[i].name + '</p>');
 		if (listOfExt[i].installType === "development")
+		{
 			fullPath="#";
+			var clipboard = '<button class="copyUrl" data-href="#">Extension under development</button>';
+		}
 		else
+		{
 			fullPath = path + listOfExt[i].id + "/";
-		if ('icons' in listOfExt[i] && listOfExt[i].icons.length > 0)
-		{
-			img = "<img src='" + listOfExt[i].icons[0].url + "' width='16px' height='16px'/>";
+			if ('icons' in listOfExt[i] && listOfExt[i].icons.length > 0)
+			{
+				img = "<img src='" + listOfExt[i].icons[0].url + "' width='16px' height='16px'/>";
+			}
+			else
+			{
+			}
+			var clipboard = '<button class="copyUrl" data-href="' + fullPath +'">Copy to clipboard</button>';
 		}
-		else
-		{
-		}
-		var clipboard = '<button id="copyUrl" data-href="' + fullPath +'">Copy to clipboard</button>';
-		$(".chrome-ext-list").append(img + '<a href="' + /*+ 'file://' + fullPath +*/ '">' + listOfExt[i].name + '</a>' + clipboard + '<br/>');
+		var html = "<div class='extension-info'>" + img + '<a href="' + /*+ 'file://' + fullPath +*/ '">' + listOfExt[i].name + '</a>' + clipboard + '<br/>' + '</div>';
+		$(".chrome-ext-list").append(html);
 	}
 };
 
@@ -126,12 +132,7 @@ $(document).ready( function() {
 	});
 });
 
-$("#copyUrl").live('click',function() {
+$(".copyUrl").live('click',function() {
 	console.log($(this), $(this).data("href"));
 	copyToClipboard($(this).data("href"));
 });
-
-
-
-
-

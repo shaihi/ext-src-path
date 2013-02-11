@@ -9,6 +9,6 @@
 //					"file:///*/*", "file://*/*"
 				],
    "manifest_version": 2,
-   "name": "Extension source code",
-   "version": "0.1"
+   "name": "Extension Source Locator",
+   "version": "0.2"
 }
