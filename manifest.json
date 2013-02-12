@@ -6,9 +6,8 @@
 					"management",
 					"storage",
 					"clipboardWrite"
-//					"file:///*/*", "file://*/*"
 				],
    "manifest_version": 2,
    "name": "Extension Source Locator",
-   "version": "0.2"
+   "version": "0.2.1"
 }

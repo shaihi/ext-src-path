@@ -27,7 +27,7 @@ function getChromeExtPath(username) {
 		
 	switch (OsName) {
 	case "MacOS":
-		path = "/Users/" + username + "/Library/Application Support/Google/Chrome/Default/Extensions";
+		path = "/Users/" + username + "/Library/Application Support/Google/Chrome/Default/Extensions/";
 		break;
 	case "UNIX":
 		//not supported yet
