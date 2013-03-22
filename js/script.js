@@ -50,7 +50,6 @@ var getAllExtFunc = function (listOfExt) {
 	var fullPath;
 	for(var i=0; i< len; i++)
 	{
-		console.log("processing " + i);
 		//console.log('<p>' + listOfExt[i].name + '</p>');
 		if (listOfExt[i].installType === "development")
 		{
@@ -114,7 +113,9 @@ console.log(" username is " + username);
 $(document).ready( function() {
 	//check if we have a username saved
 	var dbdata = Storage.load(null,"path");
-	if (typeof dbdata != "undefined" || OSType === "Linux")
+	console.log("dbdata is " + dbdata);
+	if (dbdata!= null && username != null &&
+		(typeof dbdata != "undefined" || OSType === "Linux"))
 	{
 		$(".windows").hide();
 		chrome.management.getAll(getAllExtFunc);
@@ -129,6 +130,7 @@ $(document).ready( function() {
 		//Get the list of all chrome extensions with their information
 		chrome.management.getAll(getAllExtFunc);
 		Storage.save(null,'path',username);
+		$(".windows").hide();
 	});
 });
 
