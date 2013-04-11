@@ -57,6 +57,7 @@ var getAllExtFunc = function (listOfExt) {
 		{
 			fullPath="#";
 			var clipboard = '<button class="copyUrl" data-href="#">Extension under development</button>';
+			img = "";
 		}
 		else
 		{
