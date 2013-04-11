@@ -48,6 +48,8 @@ var getAllExtFunc = function (listOfExt) {
 	var path = getChromeExtPath(username);
 	var img ="";
 	var fullPath;
+	$(".chrome-ext-list").append("<table class='extension-info'><tbody>");
+		
 	for(var i=0; i< len; i++)
 	{
 		//console.log('<p>' + listOfExt[i].name + '</p>');
@@ -65,12 +67,14 @@ var getAllExtFunc = function (listOfExt) {
 			}
 			else
 			{
+				img = "";
 			}
 			var clipboard = '<button class="copyUrl" data-href="' + fullPath +'">Copy to clipboard</button>';
 		}
-		var html = "<div class='extension-info'>" + img + '<a href="' + /*+ 'file://' + fullPath +*/ '">' + listOfExt[i].name + '</a>' + clipboard + '<br/>' + '</div>';
+		var html = "<tr><td>" + img + "</td><td>" + '<a href="' + '">' + listOfExt[i].name + '</a>' + "</td><td>" + clipboard + '<br/>' + "</td>";
 		$(".chrome-ext-list").append(html);
 	}
+	$(".chrome-ext-list").append("</tbody></table>");
 };
 
 var Storage = {
