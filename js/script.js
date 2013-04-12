@@ -118,9 +118,10 @@ console.log(" username is " + username);
 $(document).ready( function() {
 	//check if we have a username saved
 	var dbdata = Storage.load(null,"path");
+	var OSName = OSType();
 	console.log("dbdata is " + dbdata);
 	if (dbdata!= null && username != null &&
-		(typeof dbdata != "undefined" || OSType === "Linux"))
+		(typeof dbdata != "undefined" || OSName === "Linux"))
 	{
 		$(".windows").hide();
 		chrome.management.getAll(getAllExtFunc);
